@@ -7,6 +7,7 @@ node {
 
     dir("${env.WORKSPACE}") {
         stage('Gradle Build') {
+            sh 'ls'
             sh 'chmod +x gradlew'
             sh 'gradlew clean build'
         }
