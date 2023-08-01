@@ -5,8 +5,8 @@ def getCommitType(commit) {
 }
 
 node {
-    echo "Hello World"
-    // def vars = checkout scm
+    // echo "Hello World"
+    def vars = checkout scm
     // def prj_type = getCommitType(vars.GIT_COMMIT).substring(1,3)
    
 }
