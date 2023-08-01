@@ -2,25 +2,25 @@ node {
     def GIT_URL = "https://github.com/jindaram-stu/jenkins-test.git"
 
     stage('Pull') {
-        steps {
+        step {
             git url: "${GIT_URL}", branch: "main", poll: true, changelog: true
         }
     }
 
     stage('Gradle Build') {
-        steps {
+        step {
             sh 'gradlew clean build'
         }
     }
 
     stage('Docker Build') {
-        steps {
+        step {
             sh 'docker build -t jindaram/perper .'
         }
     }
 
     stage('Deploy') {
-        steps {
+        step {
             sh 'docker run -d --name testserver -p 8084:8084'
         }
     }
