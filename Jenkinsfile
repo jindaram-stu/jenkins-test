@@ -1,3 +1,4 @@
 node {
-    echo "hello"
+    def vars = checkout scm
+    echo "Hello World"
 }
