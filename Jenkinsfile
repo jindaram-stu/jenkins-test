@@ -9,7 +9,7 @@ node {
         stage('Gradle Build') {
             sh 'ls'
             sh 'chmod +x gradlew'
-            sh 'gradlew clean build'
+            sh './gradlew clean build'
         }
 
         stage('Docker Build') {
