@@ -8,6 +8,6 @@ public class TestController {
 
     @GetMapping("/test")
     public String test() {
-        return "Hello Jenkins and Docker";
+        return "햇살도 둥글둥글하게 뭉치는 맑은 날";
     }
 }
