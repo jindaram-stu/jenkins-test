@@ -6,6 +6,12 @@ node {
     }
 
     dir("${env.WORKSPACE}") {
+        stage('Docker clear') {
+            sh 'docker stop testserver'
+            sh 'docker rm testserver'
+        }
+
+
         stage('Gradle Build') {
             sh 'chmod +x gradlew'
             sh './gradlew clean build'
