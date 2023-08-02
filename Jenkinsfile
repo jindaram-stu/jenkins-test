@@ -7,7 +7,6 @@ node {
 
     dir("${env.WORKSPACE}") {
         stage('Gradle Build') {
-            sh 'ls'
             sh 'chmod +x gradlew'
             sh './gradlew clean build'
         }
@@ -17,7 +16,7 @@ node {
         }
         
         stage('Docker Run') {
-            sh 'docker run -d --name testserver -p 8084:8084'
+            sh 'docker run -d --name testserver -p 8084:8084 jindaram/perper'
         }
     }
 
