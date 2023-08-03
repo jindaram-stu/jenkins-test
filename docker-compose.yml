@@ -1,0 +1,25 @@
+version: '3'
+services:
+    test_back:
+      container_name: test_back
+      image: test_back
+      build:
+        context: .
+        dockerfile: Dockerfile_back
+      ports:
+        - 8085:8085
+      networks:
+        - test-network
+    test_front:
+      container_name: test_front
+      image: test_front
+      build:
+        context: .
+        dockerfile: Dockerfile_front
+      ports:
+        - 80:80
+      networks:
+        - test-network
+networks:
+  test-network:
+    driver: bridge
