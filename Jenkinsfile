@@ -6,24 +6,22 @@ node {
     }
 
     dir("${env.WORKSPACE}") {
-        stage('Docker clear') {
-            sh 'docker stop testserver'
-            sh 'docker rm testserver'
-        }
-
-
         stage('Gradle Build') {
             sh 'chmod +x gradlew'
             sh './gradlew clean build'
         }
 
-        stage('Docker Build') {
-            sh 'docker build -t jindaram/perper .'
+        stage('Deploy') {
+            sh 'docker-compose up -d'
         }
-        
-        stage('Docker Run') {
-            sh 'docker run -d --name testserver -p 8084:8084 jindaram/perper'
-        }
+
+//         stage('Docker Build') {
+//             sh 'docker build -t jindaram/perper .'
+//         }
+//
+//         stage('Docker Run') {
+//             sh 'docker run -d --name testserver -p 8084:8084 jindaram/perper'
+//         }
     }
 
 }
