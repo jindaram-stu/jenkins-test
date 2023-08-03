@@ -15,7 +15,7 @@ services:
       image: test_front
       build:
         context: .
-        dockerfile: Dockerfile_front
+        dockerfile: Dockerfile
       ports:
         - 80:80
       networks:
