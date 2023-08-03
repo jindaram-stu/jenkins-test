@@ -1,5 +1,22 @@
-FROM openjdk:8
-ENV APP_HOME=/usr/app/
-WORKDIR $APP_HOME
-COPY ./build/libs/comm-0.0.1-SNAPSHOT.jar ./app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM node:18.14
+
+WORKDIR /webapp
+
+COPY public ./public
+COPY src ./src
+COPY package.json ./package.json
+
+RUN npm install
+RUN npm run build
+
+FROM nginx:stable-alpine
+
+COPY ./build /usr/share/nginx/html
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx.conf /etc/nginx/conf.d
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
