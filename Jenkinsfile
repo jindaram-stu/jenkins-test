@@ -4,6 +4,35 @@ def getCommitType(commit) {
     }
 }
 
+def executeALL() {
+        stage('Gradle Build') {
+            sh 'chmod +x gradlew'
+            sh './gradlew clean build'
+        }
+
+        stage('Deploy') {
+            sh 'docker-compose down --rmi all'
+            sh 'docker-compose up -d --build'
+        }
+}
+
+def executeFE() {
+    stage('Deploy') {
+        sh 'docker-compose up -d --build test_front'
+    }
+}
+
+def executeBE() {
+    stage('Gradle Build') { 
+        sh 'chmod +x gradlew'
+        sh './gradlew clean build'
+    }
+
+    stage('Deploy') {
+        sh 'docker-compose up -d --build test_back'
+    }
+}
+
 node {
     def GIT_URL = "https://github.com/jindaram-stu/jenkins-test.git"
     def vars = checkout scm
@@ -19,23 +48,18 @@ node {
     }
 
     dir("${env.WORKSPACE}") {
-        stage('Gradle Build') {
-            sh 'chmod +x gradlew'
-            sh './gradlew clean build'
+        if (type == "AL") {
+            executeALL()
         }
 
-        stage('Deploy') {
-            sh 'docker-compose down --rmi all'
-            sh 'docker-compose up -d'
+        if (type == "FE") {
+            executeFE
         }
 
-//         stage('Docker Build') {
-//             sh 'docker build -t jindaram/perper .'
-//         }
-//
-//         stage('Docker Run') {
-//             sh 'docker run -d --name testserver -p 8084:8084 jindaram/perper'
-//         }
+        if (type == "BE") {
+            executeBE()
+        }
+        
     }
 
 }
