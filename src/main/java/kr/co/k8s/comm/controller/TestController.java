@@ -13,4 +13,9 @@ public class TestController {
         return "서버로부터 전송된 메시지입니다.";
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello world!";
+    }
+
 }
