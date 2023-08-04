@@ -12,6 +12,7 @@ node {
         }
 
         stage('Deploy') {
+            sh 'docker-compose down --rmi all'
             sh 'docker-compose up -d'
         }
 
