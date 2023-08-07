@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
         <h2>Anyway</h2>
-        <h1>바뀐 리액트</h1>  
+        <h1>!바뀐 리액트</h1>  
         <p>{message}</p>
         <button onClick= {() => {submit()}}>바꾸기</button>
     </div>
